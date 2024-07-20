@@ -15,9 +15,11 @@
 
 // layers
 #define DEFAULT 0
-#define LOWER 1
-#define MAGIC 2
-#define FACTORY_TEST 3
+#define NEO     1
+#define PROG    2
+#define NAV     3
+#define LOWER   4
+#define MAGIC   5
 
 / {
     behaviors {
@@ -25,10 +27,31 @@
         // Configure it as a tap dance, so the first tap (or hold) is a &mo and the second tap is a &to
         layer_td: tap_dance_0 {
             compatible = "zmk,behavior-tap-dance";
-            label = "LAYER_TAP_DANCE";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
             bindings = <&mo LOWER>, <&to LOWER>;
+        };
+
+        prog_td: tap_dance_1 {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&mo PROG>, <&tog NEO>;
+        };
+
+        neo_prog_td: tap_dance_2 {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp BSLH>, <&tog NEO>;
+        };
+
+        lth: layer_tap_hold {
+            compatible = "zmk,behavior-hold-tap";
+            flavor = "hold-preferred";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&kp>;
         };
 
         magic: magic_hold_tap {
@@ -92,20 +115,61 @@
 
         default_layer {
             // ---------------------------------------------------------------------------------------------------------------------------------
-            // |  F1   |  F2 |  F3 |  F4  |  F5  |                                                               |  F6   |  F7   |  F8  |   F9  |  F10 |
-            // |  =    |  1  |  2  |  3   |  4   |  5   |                                                 |  6   |   7   |   8   |  9   |   0   |   -  |
-            // |  TAB  |  Q  |  W  |  E   |  R   |  T   |                                                 |  Y   |   U   |   I   |  O   |   P   |   \  |
-            // |  ESC  |  A  |  S  |  D   |  F   |  G   |                                                 |  H   |   J   |   K   |  L   |   ;   |   '  |
-            // |   `   |  Z  |  X  |  C   |  V   |  B   | LSHFT | LCTRL | LOWER | | LGUI  | RCTRL | RSHFT |  N   |   M   |   ,   |  .   |   /   | PGUP |
-            // | MAGIC | HOME| END | LEFT | RIGHT|      | BSPC  | DEL   | LALT  | | RALT  | RET   | SPACE |      |  UP   | DOWN  |  [   |   ]   | PGDN |
+            // |  F1   |  F2 |  F3 |  F4  |  F5  |                                                               |  F6   |  F7   |  F8  |   F9  |  F10  |
+            // |  `    |  1  |  2  |  3   |  4   |  5   |                                                 |  6   |   7   |   8   |  9   |   0   |   -   |
+            // |  TAB  |  Q  |  W  |  E   |  R   |  T   |                                                 |  Y   |   U   |   I   |  O   |   P   |   [   |
+            // |  ESC  |  A  |  S  |  D   |  F   |  G   |                                                 |  H   |   J   |   K   |  L   |   ;   |   '   |
+            // | LSHFT |  Z  |  X  |  C   |  V   |  B   | PROG  | LOWER | LCRTL | | RCTRL | RGUI  | PROG  |  N   |   M   |   ,   |  .   |   /   | RSHFT |
+            // | MAGIC | HOME| END | LEFT | RIGHT|      | BSPC  | DEL   | LALT  | | RALT  | RET   | SPACE |      |  UP   | DOWN  | PGDN | PGUP  |   ]   |
 
             bindings = <
             &kp F1         &kp F2   &kp F3      &kp F4      &kp F5                                                                                         &kp F6  &kp F7      &kp F8      &kp F9      &kp F10
-            &kp EQUAL      &kp N1   &kp N2      &kp N3      &kp N4      &kp N5                                                                     &kp N6  &kp N7  &kp N8      &kp N9      &kp N0      &kp MINUS
-            &kp TAB        &kp Q    &kp W       &kp E       &kp R       &kp T                                                                      &kp Y   &kp U   &kp I       &kp O       &kp P       &kp BSLH
-            &kp ESC        &kp A    &kp S       &kp D       &kp F       &kp G                                                                      &kp H   &kp J   &kp K       &kp L       &kp SEMI    &kp SQT
-            &kp GRAVE      &kp Z    &kp X       &kp C       &kp V       &kp B   &kp LSHFT   &kp LCTRL   &layer_td  &kp LGUI  &kp RCTRL &kp RSHFT   &kp N   &kp M   &kp COMMA   &kp DOT     &kp FSLH    &kp PG_UP
-            &magic MAGIC 0 &kp HOME &kp END     &kp LEFT    &kp RIGHT           &kp BSPC    &kp DEL     &kp LALT   &kp RALT  &kp RET   &kp SPACE           &kp UP  &kp DOWN    &kp LBKT    &kp RBKT    &kp PG_DN
+            &kp GRAVE      &kp N1   &kp N2      &kp N3      &kp N4      &kp N5                                                                     &kp N6  &kp N7  &kp N8      &kp N9      &kp N0      &kp MINUS
+            &kp TAB        &kp Q    &kp W       &kp E       &kp R       &kp T                                                                      &kp Y   &kp U   &kp I       &kp O       &kp P       &kp LBKT
+            &lth NAV ESC   &kp A    &kp S       &kp D       &kp F       &kp G                                                                      &kp H   &kp J   &kp K       &kp L       &kp SEMI    &kp SQT
+            &kp LSHFT      &kp Z    &kp X       &kp C       &kp V       &kp B   &prog_td    &layer_td   &kp LCTRL  &kp RCTRL &kp LGUI  &prog_td    &kp N   &kp M   &kp COMMA   &kp DOT     &kp FSLH    &kp RSHFT
+            &magic MAGIC 0 &kp HOME &kp END     &kp LEFT    &kp RIGHT           &kp BSPC    &kp DEL     &kp LALT   &kp RALT  &kp RET   &kp SPACE           &kp UP  &kp DOWN    &kp PG_UP   &kp PG_DN   &kp RBKT
+            >;
+        };
+
+        neo_layer {
+            bindings = <
+            &trans  &trans  &trans  &trans  &trans                                                                             &trans  &trans  &trans  &trans  &trans
+            &trans  &trans  &trans  &trans  &trans  &trans                                                             &trans  &trans  &trans  &trans  &trans  &trans
+            &trans  &trans  &trans  &trans  &trans  &trans                                                             &trans  &trans  &trans  &trans  &trans  &trans
+            &trans  &trans  &trans  &trans  &trans  &trans                                                             &trans  &trans  &trans  &trans  &trans  &trans
+            &trans  &trans  &trans  &trans  &trans  &trans  &neo_prog_td &trans &trans     &trans &trans &neo_prog_td  &trans  &trans  &trans  &trans  &trans  &trans
+            &trans  &trans  &trans  &trans  &trans          &trans       &trans &trans     &trans &trans &trans        &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        prog_layer {
+            // ---------------------------------------------------------------------------------------------------------------------------------
+            // |       |     |     |      |      |                                                               |       |       |      |       |       |
+            // |       |     |     |      |      |      |                                                 |      |       |       |      |       |       |
+            // |       |  @  |  _  |  [   |  ]   |  ^   |                                                 |  !   |   <   |   >   |  =   |   &   |       |
+            // |       |  \  |  /  |  {   |  }   |  *   |                                                 |  ?   |   (   |   )   |  -   |   :   |       |
+            // |       |  #  |  $  |  |   |  ~   |  `   |       |       |       | |       |       |       |  +   |   %   |   "   |  '   |   ;   |       |
+            // |       |     |     |      |      |      |       |       |       | |       |       |       |      |       |       |      |       |       |
+
+            bindings = <
+            &trans &trans   &trans      &trans      &trans                                                                          &trans    &trans    &trans      &trans      &trans
+            &trans &trans   &trans      &trans      &trans      &trans                                                    &trans    &trans    &trans    &trans      &trans      &trans
+            &trans &kp AT   &kp UNDER   &kp LBKT    &kp RBKT    &kp CARET                                                 &kp EXCL  &kp LT    &kp GT    &kp EQUAL   &kp AMPS    &trans
+            &trans &kp BSLH &kp FSLH    &kp LBRC    &kp RBRC    &kp STAR                                                  &kp QMARK &kp LPAR  &kp RPAR  &kp MINUS   &kp COLON   &trans
+            &trans &kp HASH &kp DLLR    &kp PIPE    &kp TILDE   &kp GRAVE  &trans &trans &trans     &trans &trans &trans  &kp PLUS  &kp PRCNT &kp DQT   &kp SQT     &kp SEMI    &trans
+            &trans &trans   &trans      &trans      &trans                 &trans &trans &trans     &trans &trans &trans            &trans    &trans    &trans      &trans      &trans
+            >;
+        };
+
+        nav_layer {
+            bindings = <
+            &trans  &trans  &trans  &trans  &trans                                                                    &trans    &trans    &trans      &trans      &trans
+            &trans  &trans  &trans  &trans  &trans  &trans                                                 &trans     &trans    &trans    &trans      &trans      &trans
+            &trans  &trans  &trans  &trans  &trans  &trans                                                 &kp K_CALC &kp PG_UP &kp UP    &kp PG_DN   &kp PSCRN   &trans
+            &trans  &trans  &trans  &trans  &trans  &trans                                                 &kp HOME   &kp LEFT  &kp DOWN  &kp RIGHT   &kp INS     &trans
+            &trans  &trans  &trans  &trans  &trans  &trans  &trans &trans &trans     &trans &trans &trans  &kp END    &trans    &trans    &trans      &trans      &trans
+            &trans  &trans  &trans  &trans  &trans          &trans &trans &trans     &trans &trans &trans             &trans    &trans    &trans      &trans      &trans
             >;
         };
 
@@ -115,7 +179,7 @@
             &trans            &none               &none           &none           &none           &kp HOME                                                                              &kp LPAR     &kp KP_NUM   &kp KP_EQUAL &kp KP_DIVIDE &kp KP_MULTIPLY &kp PSCRN
             &trans            &none               &none           &kp UP          &none           &kp END                                                                               &kp RPAR     &kp KP_N7    &kp KP_N8    &kp KP_N9     &kp KP_MINUS    &kp SLCK
             &trans            &none               &kp LEFT        &kp DOWN        &kp RIGHT       &kp PG_UP                                                                             &kp PRCNT    &kp KP_N4    &kp KP_N5    &kp KP_N6     &kp KP_PLUS     &none
-            &trans            &kp K_CMENU         &none           &kp F11         &kp F12         &kp PG_DN       &trans      &trans      &to DEFAULT &trans      &trans      &trans    &kp COMMA    &kp KP_N1    &kp KP_N2    &kp KP_N3     &kp KP_ENTER    &trans
+            &trans            &kp K_CMENU         &none           &kp F11         &kp F12         &kp PG_DN       &trans      &to DEFAULT &trans      &trans      &trans      &trans    &kp COMMA    &kp KP_N1    &kp KP_N2    &kp KP_N3     &kp KP_ENTER    &trans
             &trans            &kp CAPS            &kp INS         &kp F11         &kp F12                         &trans      &trans      &trans      &trans      &trans      &trans                 &kp KP_N0    &kp KP_N0    &kp KP_DOT    &kp KP_ENTER    &trans
             >;
         };
@@ -127,19 +191,9 @@
             &none             &rgb_ug RGB_SPI     &rgb_ug RGB_SAI &rgb_ug RGB_HUI &rgb_ug RGB_BRI &rgb_ug RGB_TOG                                                                      &none      &none      &none      &none      &none      &none
             &bootloader       &rgb_ug RGB_SPD     &rgb_ug RGB_SAD &rgb_ug RGB_HUD &rgb_ug RGB_BRD &rgb_ug RGB_EFF                                                                      &none      &none      &none      &none      &none      &bootloader
             &sys_reset        &none               &none           &none           &none           &none           &bt_2     &bt_3     &none            &none     &none     &none       &none      &none      &none      &none      &none      &sys_reset
-            &none             &none               &none           &none           &none                           &bt_0     &bt_1     &out OUT_USB     &none     &none     &none                  &none      &none      &none      &none      &to FACTORY_TEST
+            &none             &none               &none           &none           &none                           &bt_0     &bt_1     &out OUT_USB     &none     &none     &none                  &none      &none      &none      &none      &none
             >;
         };
 
-        factory_test_layer {
-            bindings = <
-            &kp N0   &kp N6   &kp N2   &kp N8   &kp N4                                                                              &kp N4   &kp N8   &kp N2   &kp N6   &kp N0
-            &kp N1   &kp N7   &kp N3   &kp N9   &kp N5   &kp N0                                                            &kp N0   &kp N5   &kp N9   &kp N3   &kp N7   &kp N1
-            &kp N2   &kp N8   &kp N4   &kp N0   &kp N6   &kp N1                                                            &kp N1   &kp N6   &kp N0   &kp N4   &kp N8   &kp N2
-            &kp N3   &kp N9   &kp N5   &kp N1   &kp N7   &kp N2                                                            &kp N2   &kp N7   &kp N1   &kp N5   &kp N9   &kp N3
-            &kp N4   &kp N0   &kp N6   &kp N2   &kp N8   &kp N3   &kp N4   &kp N5   &kp N6      &kp N6   &kp N5   &kp N4   &kp N3   &kp N8   &kp N2   &kp N6   &kp N0   &kp N4
-            &kp N5   &kp N1   &kp N7   &kp N3   &kp N9            &kp N7   &kp N8   &kp N9      &kp N9   &kp N8   &kp N7            &kp N9   &kp N3   &kp N7   &kp N1   &kp N5
-            >;
-        };
     };
 };
