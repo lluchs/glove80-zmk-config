@@ -1,0 +1,3 @@
+[submodule "zmk"]
+	path = src
+	url = https://github.com/moergo-sc/zmk
