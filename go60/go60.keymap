@@ -206,7 +206,7 @@
 };
 
 &cirque_rh_listener {
-    input-processors = <&zip_xy_scaler 3 1>, <&zip_temp_layer LAYER_Mouse 2000>;
+    input-processors = <&zip_xy_scaler 3 1>, <&zip_temp_layer LAYER_Mouse 1000>;
     layer_2 {
         layers = <2>;
         input-processors = <&zip_xy_scaler 9 1>;
