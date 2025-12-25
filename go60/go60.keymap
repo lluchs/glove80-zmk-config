@@ -150,6 +150,30 @@
 
 #define COMBO_OPTS timeout-ms = <20>; require-prior-idle-ms = <200>;
 
+        combo_left_shift {
+            COMBO_OPTS
+            key-positions = <POS_LH_C2R2 POS_LH_C2R3>;
+            bindings = <&kp LSHFT>;
+        };
+
+        combo_right_shift {
+            COMBO_OPTS
+            key-positions = <POS_RH_C2R2 POS_RH_C2R3>;
+            bindings = <&kp RSHFT>;
+        };
+
+        combo_left_mod3 {
+            COMBO_OPTS
+            key-positions = <POS_LH_C3R2 POS_LH_C3R3>;
+            bindings = <&kp CAPS>;
+        };
+
+        combo_right_mod3 {
+            COMBO_OPTS
+            key-positions = <POS_RH_C3R2 POS_RH_C3R3>;
+            bindings = <&kp CAPS>;
+        };
+
         // F1 combo for Go60 - TailorKey
         combo_F1_cb_v1_TKZ {
             COMBO_OPTS
@@ -242,7 +266,7 @@
             bindings = <
             &kp GRAVE  &kp N1     &kp N2       &kp N3          &kp N4  &kp N5                                                      &kp N6        &kp N7       &kp N8    &kp N9    &kp N0   &kp MINUS
               &kp TAB   &kp Q      &kp W        &kp E           &kp R   &kp T                                                       &kp Y         &kp U        &kp I     &kp O     &kp P    &kp LBKT
-              &kp ESC   &kp A      &kp S  &hml CAPS D    &hml LSHFT F   &kp G                                                       &kp H  &hmr RSHFT J  &hmr CAPS K     &kp L  &kp SEMI     &kp SQT
+              &kp ESC   &kp A      &kp S        &kp D           &kp F   &kp G                                                       &kp H         &kp J        &kp K     &kp L  &kp SEMI     &kp SQT
  &magic LAYER_Magic 0   &kp Z      &kp X        &kp C           &kp V   &kp B                                                       &kp N         &kp M    &kp COMMA   &kp DOT  &kp FSLH  &keypad_td
                                 &kp PLUS    &kp PSCRN  &symbol_nav_td                                                                          &kp LGUI     &kp BSLH  &kp RBKT
                                                                    &kp BSPC  &kp DEL  &kp LCTRL            &kp LALT  &kp RET  &kp SPACE
