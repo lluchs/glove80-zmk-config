@@ -285,29 +285,29 @@
           SYM_NAV_ESC   &kp A      &kp S        &kp D     &kp F   &kp G                                                              &kp H         &kp J        &kp K     &kp L  &kp SEMI     &kp SQT
             &kp LSHFT   &kp Z      &kp X        &kp C     &kp V   &kp B                                                              &kp N         &kp M    &kp COMMA   &kp DOT  &kp FSLH  &kp RSHFT
                     &magic LAYER_Magic 0   &keypad_td  &kp CAPS                                                                                 &kp BSLH     &kp LGUI  &kp RBKT
-                                                               &kp BSPC  &symbol_nav_td  &kp LCTRL            &kp LALT  &kp RET  &kp SPACE
+                                                               &kp BSPC  &kp LALT  &kp LCTRL            &symbol_nav_td  &kp RET  &kp SPACE
             >;
         };
 
         layer_Keypad {
             bindings = <
-                &none     &kp F1     &kp F2          &kp F3               &kp F4         &kp F5                                                 &kp F6     &kp F7      &kp F8        &kp F9          &kp F10     &kp F11
-               &trans      &none   &kp HOME          &kp UP              &kp END      &kp PG_UP                                              &kp KP_N7  &kp KP_N8   &kp KP_N9  &kp KP_MINUS     &kp KP_SLASH     &kp F12
-               &trans  &kp LC(Y)   &kp LEFT        &kp DOWN            &kp RIGHT      &kp PG_DN                                              &kp KP_N4  &kp KP_N5   &kp KP_N6   &kp KP_PLUS  &kp KP_MULTIPLY  &kp KP_NUM
-               &trans  &kp LC(Z)  &kp LC(X)       &kp LC(C)            &kp LC(V)  &kp LS(LC(V))                                              &kp KP_N1  &kp KP_N2   &kp KP_N3  &kp KP_ENTER        &kp EQUAL      &trans
-                       &magic LAYER_Magic 0  &to LAYER_Base  &mo LAYER_SymbolNav                                                                        &kp KP_N0  &kp KP_DOT      &kp BSPC
-                                                                                    &trans  &trans  &trans              &trans  &trans  &kp KP_N0
+                &none     &kp F1     &kp F2          &kp F3     &kp F4         &kp F5                                                     &kp F6     &kp F7      &kp F8        &kp F9          &kp F10     &kp F11
+               &trans      &none   &kp HOME          &kp UP    &kp END      &kp PG_UP                                                  &kp KP_N7  &kp KP_N8   &kp KP_N9  &kp KP_MINUS     &kp KP_SLASH     &kp F12
+               &trans  &kp LC(Y)   &kp LEFT        &kp DOWN  &kp RIGHT      &kp PG_DN                                                  &kp KP_N4  &kp KP_N5   &kp KP_N6   &kp KP_PLUS  &kp KP_MULTIPLY  &kp KP_NUM
+               &trans  &kp LC(Z)  &kp LC(X)       &kp LC(C)  &kp LC(V)  &kp LS(LC(V))                                                  &kp KP_N1  &kp KP_N2   &kp KP_N3  &kp KP_ENTER        &kp EQUAL      &trans
+                       &magic LAYER_Magic 0  &to LAYER_Base     &trans                                                                            &kp KP_N0  &kp KP_DOT      &kp BSPC
+                                                                               &trans  &trans  &trans     &mo LAYER_SymbolNav  &trans  &kp KP_N0
             >;
         };
 
         layer_SymbolNav {
             bindings = <
-              &kp INS    &kp F1     &kp F2    &kp F3          &kp F4     &kp F5                                       &kp F6     &kp F7           &kp F8       &kp F9          &kp F10    &kp F11
-             &kp SLCK  &kp EXCL   &kp HOME    &kp UP         &kp END  &kp PG_UP                                   &kp K_CALC  &kp PG_UP           &kp UP    &kp PG_DN        &kp PSCRN    &kp F12
-               &trans    &kp AT   &kp LEFT  &kp DOWN       &kp RIGHT  &kp PG_DN                                     &kp HOME   &kp LEFT         &kp DOWN    &kp RIGHT          &kp INS     &trans
-               &trans  &kp HASH   &kp LBKT  &kp RBKT        &kp LBRC   &kp RBRC                                      &kp END   &kp STAR        &kp UNDER     &kp PLUS        &kp LSHFT  &kp LCTRL
-                      &magic LAYER_Magic 0  &kp CARET  &to LAYER_Base                                                             &trans  &kp LC(LS(TAB))  &kp LC(TAB)
-                                                                         &trans  &trans  &trans       &trans  &trans  &trans
+              &kp INS    &kp F1     &kp F2    &kp F3     &kp F4     &kp F5                                               &kp F6     &kp F7           &kp F8       &kp F9          &kp F10    &kp F11
+             &kp SLCK  &kp EXCL   &kp HOME    &kp UP    &kp END  &kp PG_UP                                           &kp K_CALC  &kp PG_UP           &kp UP    &kp PG_DN        &kp PSCRN    &kp F12
+               &trans    &kp AT   &kp LEFT  &kp DOWN  &kp RIGHT  &kp PG_DN                                             &kp HOME   &kp LEFT         &kp DOWN    &kp RIGHT          &kp INS     &trans
+               &trans  &kp HASH   &kp LBKT  &kp RBKT   &kp LBRC   &kp RBRC                                              &kp END   &kp STAR        &kp UNDER     &kp PLUS        &kp LSHFT  &kp LCTRL
+                      &magic LAYER_Magic 0  &kp CARET    &trans                                                          &trans  &kp LC(LS(TAB))  &kp LC(TAB)
+                                                                    &trans  &trans  &trans       &to LAYER_Base  &trans  &trans
             >;
         };
 
