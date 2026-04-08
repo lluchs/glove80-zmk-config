@@ -190,6 +190,12 @@
             bindings = <&kp DEL>;
         };
 
+        combo_left_super {
+            COMBO_OPTS
+            key-positions = <POS_LH_T2 POS_LH_T3>;
+            bindings = <&kp LGUI>;
+        };
+
         // F1 combo for Go60 - TailorKey
         combo_F1_cb_v1_TKZ {
             COMBO_OPTS
